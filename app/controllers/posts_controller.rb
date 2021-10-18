@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     # @post.user = current_user
-    # attach user to post to demonstrate testing helper functions
+    # attach user to post to demonstrate AAA testing of a helper function
     @post = assign_post_creator(@post, current_user)
 
     respond_to do |format|
