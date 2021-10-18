@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: %i[index show]
   include PostsHelper
 
   # GET /posts or /posts.json
@@ -9,8 +10,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    # @post.views += 1
-    # @post.save
+    # TODO: add test
+    @post.views += 1
+    @post.save
   end
 
   # GET /posts/new
