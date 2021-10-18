@@ -3,6 +3,7 @@ $current_user = nil
 
 RSpec.describe 'posts/show', type: :view do
   include UsersHelper
+
   let!(:current_user) { $current_user = mock_user }
 
   before(:each) do
@@ -18,7 +19,7 @@ RSpec.describe 'posts/show', type: :view do
     render
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/1/)
+    expect(rendered).to match(/#{current_user.id}/)
     expect(rendered).to match(/0/)
   end
 end
