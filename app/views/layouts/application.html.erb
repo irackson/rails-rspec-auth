@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RailsRspecAuth</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+	<head>
+		<title>IanRackson RailsRspecAuth</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+	<body>
+		<p class="notice"><%= notice %></p>
+		<p class="alert"><%= alert %></p>
+		<% if user_signed_in? %>
+			You are signed in as: <%= current_user.email %>
+			<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+			<%= link_to 'Account Settings', edit_user_registration_path %>
+		<% else %>
+			<% if !request.original_url.split('/').include?('users') %>
+				<%= link_to 'Log In', new_user_session_path %>
+				<%= link_to 'Sign Up', new_user_registration_path%>
+			<% end %>
+		<% end %>
+		<% if request.original_url != root_url %>
+			<%= link_to 'Home Page', root_url %>
+		<% end %>
+		<%= yield %>
+	</body>
 </html>
